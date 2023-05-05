@@ -8,36 +8,38 @@
 import UIKit
 import SnapKit
 
-protocol HomeViewProtocol: AnyObject {
-    func fetchNews()
-    func didTouchNews(index: Int)
-    func didTouchSegementCountry(index: Int)
+protocol LoginViewDelegate: AnyObject {
+    func loginTapped(email: String, password: String)
 }
 
 class LoginView: UIView {
-    private let emailLbl : UILabel = {
+    
+    private let emailLbl: UILabel = {
         let label = UILabel()
         label.text = "EMAIL"
         return label
     }()
     
-    private let passwordLbl : UILabel = {
+    private let passwordLbl: UILabel = {
         let label = UILabel()
         label.text = "PASSWORD"
         return label
     }()
     
-    private let emailTxtF : UITextField = {
+    private let emailTxtF: UITextField = {
         let txtF = UITextField()
         txtF.placeholder = "email"
         txtF.borderStyle = .roundedRect
+        txtF.keyboardType = .emailAddress
+        txtF.autocapitalizationType = .none
         return txtF
     }()
     
-    private let passwordTxtF : UITextField = {
+    private let passwordTxtF: UITextField = {
         let txtF = UITextField()
         txtF.placeholder = "password"
         txtF.borderStyle = .roundedRect
+        txtF.isSecureTextEntry = true
         return txtF
     }()
     
@@ -69,7 +71,7 @@ class LoginView: UIView {
         return collectionView
     }()
     let refreshControl = UIRefreshControl()
-    weak var homeViewProtocol : HomeViewProtocol?
+    weak var delegate : LoginViewDelegate?
     
     
     
@@ -154,9 +156,9 @@ class LoginView: UIView {
         }
     }
     
-    
+
     @objc private func loginAction() {
-       print("oi")
+        delegate?.loginTapped(email: emailTxtF.text ?? "", password: passwordTxtF.text ?? "")
     }
     
 }
