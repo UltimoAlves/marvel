@@ -10,11 +10,11 @@ import UIKit
 class LoginViewController: UIViewController {
 
     private let mainView = LoginView()
-    private let viewModel = LoginViewModel()
+    var viewModel : LoginViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView.delegate = self
-        viewModel.delegate = self
+        viewModel?.delegate = self
         view = mainView
         
     }
@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: LoginViewDelegate {
     func loginTapped(email: String, password: String) {
-        viewModel.authenticate(email: email, password: password)
+        viewModel?.authenticate(email: email, password: password)
     }
 }
 
@@ -34,6 +34,6 @@ extension LoginViewController: LoginViewModelDelegate {
     }
     
     func loginSuccess() {
-        print("sucesso")
+        viewModel?.navigateToHome()
     }
 }
