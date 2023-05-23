@@ -30,7 +30,6 @@ extension HomeRouter: HomeRouterProtocol {
     
     func routeToDetail(homeViewModel: HomeViewModel?) {
         let home = LoginModule().createModule()
-      //  home.employeeDetailViewModel.empData = empData
         viewController?.present(home, animated: true)
     }
 }

@@ -104,7 +104,6 @@
 				64F193FE2A097E32008FA4C1 /* Router */,
 				64F193FF2A097E3A008FA4C1 /* ViewModel */,
 				64F193F62A097118008FA4C1 /* Model */,
-				64F193EB2A095F9F008FA4C1 /* HomeViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -112,6 +111,7 @@
 		64F193F52A097106008FA4C1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				64F193EB2A095F9F008FA4C1 /* HomeViewController.swift */,
 				64F193E92A095F8F008FA4C1 /* HomeView.swift */,
 				64F193F12A095FCF008FA4C1 /* HomeCollectionViewCell.swift */,
 			);

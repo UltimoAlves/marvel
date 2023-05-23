@@ -16,6 +16,12 @@ class HomeCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+    private var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "nome aqui"
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
@@ -27,19 +33,34 @@ class HomeCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupLayout() {
-        backgroundColor = .cyan
+        setupTitle()
+        setupImage()
         
     }
     
-    private func setupSearchBar() {
+    func setupTitle() {
+        addSubview(titleLabel)
+        
+        titleLabel.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.centerX.equalToSuperview()
+        }
+    }
+    
+    private func setupImage() {
         addSubview(coverImage)
         
         coverImage.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(titleLabel.snp.top)
             $0.top.equalToSuperview()
             $0.left.equalToSuperview()
             $0.right.equalToSuperview()
         }
+    }
+    
+    func setCell(title: String, cover: UIImage) {
+        titleLabel.text = title
+        coverImage.image = cover
     }
     
 }
