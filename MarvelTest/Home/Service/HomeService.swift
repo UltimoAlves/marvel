@@ -15,9 +15,16 @@ class HomeService {
         guard let hashKey = ProcessInfo.processInfo.environment["MARVEL_HASH_KEY"] else { return }
         guard let publicKey = ProcessInfo.processInfo.environment["MARVEL_PUBLIC_KEY"] else { return }
         
+        
+    //    let request = AF.request("https://gateway.marvel.com:443/v1/public/comics?limit=100&ts=1&apikey=\(publicKey)&hash=\(hashKey)")
+//           // 2
+//           request.responseJSON { (data) in
+//             print(data)
+//           }
         AF.request("https://gateway.marvel.com:443/v1/public/comics?limit=100&ts=1&apikey=\(publicKey)&hash=\(hashKey)").responseDecodable(of: ComicDataWrapper.self) { response in
             switch response.result {
                 case .success(let comics):
+                print(comics)
                 self.output?.succeess(comics: comics)
                 case .failure(let error):
                 self.output?.failure(error: error)

@@ -48,7 +48,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.id, for: indexPath) as? HomeCollectionViewCell{
                cell.backgroundColor = .systemBackground
-               cell.setCell(title: viewModel?.comicTitleForIndex(index: indexPath.row) ?? "", cover: UIImage(systemName: "house") ?? UIImage())
+               cell.setCell(title: viewModel?.comicTitleForIndex(index: indexPath.row) ?? "",
+                            cover: viewModel?.comicCoverForIndex(index: indexPath.row) ?? "")
                return cell
            }
            return UICollectionViewCell()

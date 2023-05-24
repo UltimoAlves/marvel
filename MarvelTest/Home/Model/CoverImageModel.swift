@@ -8,10 +8,10 @@
 import Foundation
 
 struct CoverImageModel {
-    let url: String?
+    let path: String?
     
     enum CodingKeys: String, CodingKey {
-        case url
+        case path
     }
 }
 
@@ -19,7 +19,7 @@ extension CoverImageModel: Decodable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.url = try container.decodeIfPresent(String.self, forKey: .url)
+        self.path = try container.decodeIfPresent(String.self, forKey: .path)
         
     }
 }
@@ -28,7 +28,7 @@ extension CoverImageModel: Encodable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(url, forKey: .url)
+        try container.encodeIfPresent(path, forKey: .path)
        
     }
 }

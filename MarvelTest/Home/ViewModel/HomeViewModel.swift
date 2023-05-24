@@ -37,6 +37,10 @@ public final class HomeViewModel {
         comics[index].title ?? ""
     }
     
+    func comicCoverForIndex(index: Int) -> String {
+        comics[index].thumbnail?.path ?? ""
+    }
+    
 }
 
 extension HomeViewModel: HomeServiceOutput {

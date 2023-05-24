@@ -7,18 +7,25 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 class HomeCollectionViewCell: UICollectionViewCell {
     static let id = "HomeCell"
     private var coverImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(systemName: "house")
+        imageView.sizeToFit()
         return imageView
     }()
     
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "nome aqui"
+        label.numberOfLines = 3
+        label.font = UIFont.systemFont(ofSize: 10)
+        label.textAlignment = .center
+        label.textColor = .green
+        label.backgroundColor = .black
+        label.showsExpansionTextWhenTruncated = false
         return label
     }()
     
@@ -33,6 +40,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupLayout() {
+        backgroundColor = .blue
         setupTitle()
         setupImage()
         
@@ -43,7 +51,8 @@ class HomeCollectionViewCell: UICollectionViewCell {
         
         titleLabel.snp.makeConstraints {
             $0.bottom.equalToSuperview()
-            $0.centerX.equalToSuperview()
+            $0.left.equalToSuperview()
+            $0.right.equalToSuperview()
         }
     }
     
@@ -58,9 +67,12 @@ class HomeCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func setCell(title: String, cover: UIImage) {
-        titleLabel.text = title
-        coverImage.image = cover
+    func setCell(title: String, cover: String) {
+        titleLabel.text = title.titleFormat()
+        let url = URL(string: cover+".jpg")
+        coverImage.kf.setImage(with: url)
+      
     }
     
 }
+
