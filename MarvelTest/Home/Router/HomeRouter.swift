@@ -9,17 +9,21 @@ import Foundation
 import UIKit
 
 class HomeModule {
-    func createModule(homeViewModel: HomeViewModel) -> HomeViewController {
+    func createModule() -> HomeViewController {
         let homeViewController = HomeViewController()
-        homeViewController.viewModel = homeViewModel
-        homeViewController.viewModel?.router = HomeRouter()
-        homeViewController.viewModel?.router?.viewController = homeViewController
+        homeViewController.viewModel = HomeViewModel(router: HomeRouter(viewController: homeViewController),
+                                                     service: HomeService(),
+                                                     delegate: homeViewController)
         return homeViewController
     }
 }
 
 class HomeRouter {
     var viewController: UIViewController?
+    
+    init(viewController: UIViewController? = nil) {
+        self.viewController = viewController
+    }
 }
 
 protocol HomeRouterProtocol {

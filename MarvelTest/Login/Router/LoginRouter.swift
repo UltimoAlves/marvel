@@ -11,8 +11,7 @@ import UIKit
 class LoginModule {
     func createModule() -> LoginViewController {
         let loginViewController = LoginViewController()
-        loginViewController.viewModel = LoginViewModel()
-        loginViewController.viewModel?.router = LoginRouter()
+        loginViewController.viewModel = LoginViewModel(router: LoginRouter())
         loginViewController.viewModel?.router?.viewController = loginViewController
         return loginViewController
     }
@@ -23,13 +22,13 @@ class LoginRouter {
 }
 
 protocol LoginRouterProtocol {
-    func routeToHome(homeViewModel: HomeViewModel)
+    func routeToHome()
 }
 
 extension LoginRouter: LoginRouterProtocol {
     
-    func routeToHome(homeViewModel: HomeViewModel) {
-        let navController = UINavigationController(rootViewController: HomeModule().createModule(homeViewModel: homeViewModel))
+    func routeToHome() {
+        let navController = UINavigationController(rootViewController: HomeModule().createModule())
         navController.modalPresentationStyle = .fullScreen
         viewController?.present(navController, animated: true)
     }

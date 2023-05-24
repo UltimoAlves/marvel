@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
           window = UIWindow(windowScene: windowScene)
         //  window?.rootViewController = HomeViewController()
-        window?.rootViewController=UINavigationController(rootViewController:HomeModule().createModule(homeViewModel: HomeViewModel()))
+        window?.rootViewController=UINavigationController(rootViewController: LoginModule().createModule())
           window?.makeKeyAndVisible()
 
       }

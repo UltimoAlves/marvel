@@ -18,7 +18,6 @@ class HomeView: UIView {
         collectionView.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.id)
         collectionView.backgroundColor = .black
        
-        
         return collectionView
     }()
     
@@ -39,8 +38,6 @@ class HomeView: UIView {
     
     private func setupCollectionView() {
         addSubview(collectionView)
-        collectionView.delegate = self
-        collectionView.dataSource = self
         collectionView.snp.makeConstraints {
             $0.bottom.equalToSuperview()
             $0.top.equalToSuperview()
@@ -49,19 +46,15 @@ class HomeView: UIView {
         }
     }
     
+    func addCollectionviewDelegateDataSource(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
+        collectionView.delegate = delegate
+        collectionView.dataSource = dataSource
+        
+    }
+    
+    func reloadData() {
+        collectionView.reloadData()
+    }
+    
 }
 
-extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-           return 20
-       }
-       func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-           if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.id, for: indexPath) as? HomeCollectionViewCell{
-               cell.backgroundColor = .systemBackground
-               
-               return cell
-           }
-           return UICollectionViewCell()
-           
-       }
-}

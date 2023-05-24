@@ -38,7 +38,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func setupTitle() {
+    private func setupTitle() {
         addSubview(titleLabel)
         
         titleLabel.snp.makeConstraints {
