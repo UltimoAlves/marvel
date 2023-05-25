@@ -23,16 +23,31 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
+        setupNavigation()
     }
     
     func initialSetup(){
         view = mainView
-        navigationItem.title  = "Movie Search"
+        mainView.addCollectionviewDelegateDataSource(delegate: self, dataSource: self)
+        viewModel?.getComics()
+        mainView.showSpinner()
+    }
+    
+    func setupNavigation() {
+        navigationItem.title = "Movie Search"
         searchBar.searchResultsUpdater = self
         navigationItem.searchController = searchBar
-        mainView.addCollectionviewDelegateDataSource(delegate: self, dataSource: self)
-        viewModel?.fetchFilms()
-        mainView.showSpinner()
+        let button = UIButton(type: .custom)
+        button.setTitle("Filter", for: .normal)
+        button.setTitleColor(.black, for: .highlighted)
+        button.addTarget(self, action: #selector(filterTapped), for: .touchDown)
+        button.frame = CGRectMake(0, 0, 30, 30)
+        let barButton = UIBarButtonItem(customView: button)
+        navigationItem.rightBarButtonItem = barButton
+    }
+    @objc
+    func filterTapped() {
+        viewModel?.showFilterInput()
     }
 
 }
@@ -67,7 +82,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let height = scrollView.contentSize.height
         
         if offsetY > height - scrollView.frame.size.height {
-            viewModel?.fetchFilms()
+            viewModel?.getMoreComics()
         }
     }
 }
@@ -83,5 +98,31 @@ extension HomeViewController: HomeViewModelDelegate {
     
     func reloadContent() {
         mainView.reloadData()
+    }
+    
+    func showFilterInput() {
+        var year = UITextField()
+
+        let alert = UIAlertController(title: "Enter the year you want to filter", message: "", preferredStyle: .alert)
+        
+        let createAction = UIAlertAction(title: "Search", style: .default) { [self] (action) in
+            guard let year = Int(year.text ?? "0") else { return }
+            viewModel?.getComicsByYear(year: year)
+            viewModel?.clearData()
+            
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Year"
+            alertTextField.keyboardType = .numberPad
+            year = alertTextField
+        }
+         
+        alert.addAction(createAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
     }
 }

@@ -12,6 +12,7 @@ protocol HomeViewModelDelegate: AnyObject {
     func reloadContent()
     func showSpinner()
     func hideSpinner()
+    func showFilterInput()
 }
 
 public final class HomeViewModel {
@@ -20,6 +21,8 @@ public final class HomeViewModel {
     private var comics: [ComicModel] = []
     private weak var delegate: HomeViewModelDelegate?
     private var pageNumber = 0
+    private var yearToFilter = 0
+    
     init(router: HomeRouter!, service: HomeService, delegate: HomeViewModelDelegate) {
         self.router = router
         self.service = service
@@ -27,12 +30,29 @@ public final class HomeViewModel {
         self.service.output = self
     }
     
-    func fetchFilms() {
+    func getComics() {
         delegate?.showSpinner()
-        
         service.getComics(pageNumber: pageNumber)
         pageNumber += 1
      }
+    
+    func getMoreComics() {
+        delegate?.showSpinner()
+        if yearToFilter == 0 {
+            service.getComics(pageNumber: pageNumber)
+        } else {
+            service.getComicsByYear(pageNumber: pageNumber, year: yearToFilter)
+        }
+        
+        pageNumber += 1
+    }
+    
+    func getComicsByYear(year: Int) {
+        delegate?.showSpinner()
+        yearToFilter = year
+        service.getComicsByYear(pageNumber: pageNumber, year: yearToFilter)
+        pageNumber += 1
+    }
     
     func showSpinner() {
         delegate?.showSpinner()
@@ -54,6 +74,16 @@ public final class HomeViewModel {
         comics[index].thumbnail?.path ?? ""
     }
     
+    func showFilterInput() {
+        delegate?.showFilterInput()
+    }
+    
+    func clearData() {
+        comics.removeAll()
+        pageNumber = 0
+        delegate?.reloadContent()
+    }
+    
 }
 
 extension HomeViewModel: HomeServiceOutput {
@@ -61,10 +91,19 @@ extension HomeViewModel: HomeServiceOutput {
         self.comics.append(contentsOf: comics.data?.results ?? [])  
         delegate?.reloadContent()
         delegate?.hideSpinner()
-        
     }
     
     func failure(error: AFError) {
+        print(error)
+    }
+    
+    func succeessByYear(comics: ComicDataWrapper) {
+        self.comics.append(contentsOf: comics.data?.results ?? [])
+        delegate?.reloadContent()
+        delegate?.hideSpinner()
+    }
+    
+    func failureByYear(error: AFError) {
         print(error)
     }
 }
