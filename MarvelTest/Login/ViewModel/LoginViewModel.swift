@@ -17,7 +17,10 @@ public final class LoginViewModel {
     weak var delegate : LoginViewModelDelegate?
     private let coreData = CoreDataManager()
     private var userModel: User?
-    init(delegate: LoginViewModelDelegate? = nil) {
+    var router: LoginRouter?
+    
+    init(router: LoginRouter, delegate: LoginViewModelDelegate? = nil) {
+        self.router = router
         self.delegate = delegate
         verifyUser()
         
@@ -29,12 +32,15 @@ public final class LoginViewModel {
         }
     }
     
-    
     func authenticate(email: String, password: String) {
-        if coreData.aunthenticate(email: email, password: password) {
+     //   if coreData.aunthenticate(email: email, password: password) {
             delegate?.loginSuccess()
-        } else {
-            delegate?.loginFailure()
-        }
+//        } else {
+//            delegate?.loginFailure()
+//        }
+    }
+    
+    func navigateToHome(){
+        router?.routeToHome()
     }
 }
