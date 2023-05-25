@@ -22,6 +22,7 @@ public final class HomeViewModel {
     private weak var delegate: HomeViewModelDelegate?
     private var pageNumber = 0
     private var yearToFilter = 0
+    private var titleToFilter = ""
     
     init(router: HomeRouter!, service: HomeService, delegate: HomeViewModelDelegate) {
         self.router = router
@@ -38,10 +39,12 @@ public final class HomeViewModel {
     
     func getMoreComics() {
         delegate?.showSpinner()
-        if yearToFilter == 0 {
+        if yearToFilter == 0 && titleToFilter == "" {
             service.getComics(pageNumber: pageNumber)
-        } else {
+        } else if yearToFilter != 0 && titleToFilter == "" {
             service.getComicsByYear(pageNumber: pageNumber, year: yearToFilter)
+        } else if titleToFilter != "" {
+            service.getComicsByTitle(comicTitle: titleToFilter, pageNumber: pageNumber, year: yearToFilter)
         }
         
         pageNumber += 1
@@ -51,6 +54,13 @@ public final class HomeViewModel {
         delegate?.showSpinner()
         yearToFilter = year
         service.getComicsByYear(pageNumber: pageNumber, year: yearToFilter)
+        pageNumber += 1
+    }
+    
+    func getComicsByTitle(comicTitle: String) {
+        delegate?.showSpinner()
+        titleToFilter = comicTitle
+        service.getComicsByTitle(comicTitle: titleToFilter, pageNumber: pageNumber, year: yearToFilter)
         pageNumber += 1
     }
     

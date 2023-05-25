@@ -16,7 +16,9 @@ class HomeViewController: UIViewController {
     private var searchBar: UISearchController = {
         let sb = UISearchController()
         sb.searchBar.placeholder = "Enter the movie name"
-        sb.searchBar.searchBarStyle = .minimal
+        sb.searchBar.searchBarStyle = .prominent
+        sb.searchBar.returnKeyType = .search
+        sb.searchBar.enablesReturnKeyAutomatically = false
         return sb
     }()
     
@@ -34,12 +36,12 @@ class HomeViewController: UIViewController {
     }
     
     func setupNavigation() {
-        navigationItem.title = "Movie Search"
-        searchBar.searchResultsUpdater = self
+        searchBar.searchBar.delegate = self
         navigationItem.searchController = searchBar
         let button = UIButton(type: .custom)
         button.setTitle("Filter", for: .normal)
         button.setTitleColor(.black, for: .highlighted)
+        button.setTitleColor(.green, for: .normal)
         button.addTarget(self, action: #selector(filterTapped), for: .touchDown)
         button.frame = CGRectMake(0, 0, 30, 30)
         let barButton = UIBarButtonItem(customView: button)
@@ -52,11 +54,17 @@ class HomeViewController: UIViewController {
 
 }
 
-extension HomeViewController: UISearchResultsUpdating{
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let query = searchController.searchBar.text else{ return }
-      
+extension HomeViewController: UISearchBarDelegate{
+
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        if searchBar.text != "" {
+            viewModel?.clearData()
+            viewModel?.getComicsByTitle(comicTitle: searchBar.text ?? "")
+        }
+        return true
     }
+    
+    
 }
 
 
