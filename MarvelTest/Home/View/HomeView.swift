@@ -17,8 +17,13 @@ class HomeView: UIView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.id)
         collectionView.backgroundColor = .black
-       
         return collectionView
+    }()
+    
+    private var spinner: UIActivityIndicatorView = {
+        let activeIndicator = UIActivityIndicatorView(style: .large)
+        activeIndicator.color = .green
+        return activeIndicator
     }()
     
     init() {
@@ -32,8 +37,8 @@ class HomeView: UIView {
     }
     
     private func setupLayout() {
-        backgroundColor = .cyan
         setupCollectionView()
+        setupSpinner()
     }
     
     private func setupCollectionView() {
@@ -44,6 +49,24 @@ class HomeView: UIView {
             $0.left.equalToSuperview()
             $0.right.equalToSuperview()
         }
+    }
+    
+    private func setupSpinner() {
+        addSubview(spinner)
+        spinner.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.top.equalToSuperview()
+            $0.left.equalToSuperview()
+            $0.right.equalToSuperview()
+        }
+    }
+    
+    func showSpinner() {
+        spinner.startAnimating()
+    }
+    
+    func hideSpinner() {
+        spinner.stopAnimating()
     }
     
     func addCollectionviewDelegateDataSource(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {

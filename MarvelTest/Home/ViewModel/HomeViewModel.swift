@@ -10,6 +10,8 @@ import Alamofire
 
 protocol HomeViewModelDelegate: AnyObject {
     func reloadContent()
+    func showSpinner()
+    func hideSpinner()
 }
 
 public final class HomeViewModel {
@@ -17,7 +19,7 @@ public final class HomeViewModel {
     private var service: HomeService
     private var comics: [ComicModel] = []
     private weak var delegate: HomeViewModelDelegate?
-    
+    private var pageNumber = 0
     init(router: HomeRouter!, service: HomeService, delegate: HomeViewModelDelegate) {
         self.router = router
         self.service = service
@@ -26,8 +28,19 @@ public final class HomeViewModel {
     }
     
     func fetchFilms() {
-        service.getComics()
+        delegate?.showSpinner()
+        
+        service.getComics(pageNumber: pageNumber)
+        pageNumber += 1
      }
+    
+    func showSpinner() {
+        delegate?.showSpinner()
+    }
+    
+    func hideSpinner() {
+        delegate?.hideSpinner()
+    }
     
     func comicsCount() -> Int {
         comics.count
@@ -45,8 +58,9 @@ public final class HomeViewModel {
 
 extension HomeViewModel: HomeServiceOutput {
     func succeess(comics: ComicDataWrapper) {
-        self.comics = comics.data?.results ?? []
+        self.comics.append(contentsOf: comics.data?.results ?? [])  
         delegate?.reloadContent()
+        delegate?.hideSpinner()
         
     }
     
@@ -54,3 +68,4 @@ extension HomeViewModel: HomeServiceOutput {
         print(error)
     }
 }
+
