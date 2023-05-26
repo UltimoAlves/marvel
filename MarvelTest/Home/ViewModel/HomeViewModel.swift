@@ -94,8 +94,8 @@ public final class HomeViewModel {
         delegate?.reloadContent()
     }
     
-    func navigateToComicDetail() {
-        router?.routeToDetail()
+    func navigateToComicDetail(index: Int) {
+        router?.routeToDetail(comic: comics[index])
     }
     
 }

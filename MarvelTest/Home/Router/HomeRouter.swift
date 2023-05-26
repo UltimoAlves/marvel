@@ -26,13 +26,13 @@ class HomeRouter {
 }
 
 protocol HomeRouterProtocol: AnyObject {
-    func routeToDetail()
+    func routeToDetail(comic: ComicModel)
 }
 
 extension HomeRouter: HomeRouterProtocol {
     
-    func routeToDetail() {
-        let home = ComicDetailViewController()
-        viewController?.navigationController?.pushViewController(home, animated: true)
+    func routeToDetail(comic: ComicModel) {
+        let comicDetail = ComicDetailModule().createModule(comic: comic)
+        viewController?.navigationController?.pushViewController(comicDetail, animated: true)
     }
 }

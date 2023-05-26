@@ -21,37 +21,47 @@ class ComicDetailView: UIView {
         label.text = "Captain América"
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         label.textAlignment = .center
+        label.textColor = .green
+        label.numberOfLines = 4
         return label
     }()
     
     private var issueLabel: UILabel = {
         let label = UILabel()
         label.text = "Issue #"
+        label.textColor = .green
+        label.textAlignment = .left
         return label
     }()
     
     private var digitalPriceLabel: UILabel = {
         let label = UILabel()
         label.text = "Digital Price: $"
+        label.textColor = .green
+        label.textAlignment = .left
+        label.numberOfLines = 2
         return label
     }()
     
     private var priceLabel: UILabel = {
         let label = UILabel()
         label.text = "Price: $"
+        label.textColor = .green
+        label.textAlignment = .left
+        label.numberOfLines = 2
         return label
     }()
     
     private var buyButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .gray
+        button.backgroundColor = .green
         button.setTitle("Buy", for: .normal)
         return button
     }()
     
     private var addToCartButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .gray
+        button.backgroundColor = .blue
         button.setTitle("Add to cart", for: .normal)
         return button
     }()
@@ -67,7 +77,7 @@ class ComicDetailView: UIView {
     }
     
     private func setupLayout() {
-        backgroundColor = .blue
+        backgroundColor = .black
         setupTitle()
         setupCover()
         setupIssue()
@@ -82,8 +92,10 @@ class ComicDetailView: UIView {
         addSubview(titleLabel)
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(50)
+            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(10)
             $0.centerX.equalToSuperview()
+            $0.leading.equalTo(5)
+            $0.trailing.equalTo(5)
         }
     }
     
@@ -91,7 +103,7 @@ class ComicDetailView: UIView {
         addSubview(coverImage)
         
         coverImage.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(40)
             $0.left.equalToSuperview().offset(10)
             $0.width.equalTo(180)
             $0.height.equalTo(300)
@@ -104,6 +116,7 @@ class ComicDetailView: UIView {
         issueLabel.snp.makeConstraints {
             $0.top.equalTo(coverImage.snp.top)
             $0.leading.equalTo(coverImage.snp.trailing).offset(10)
+            $0.trailing.equalTo(5)
         }
     }
     
@@ -111,8 +124,9 @@ class ComicDetailView: UIView {
         addSubview(priceLabel)
         
         priceLabel.snp.makeConstraints {
-            $0.top.equalTo(issueLabel.snp.top).offset(50)
+            $0.top.equalTo(issueLabel.snp.bottom).offset(10)
             $0.leading.equalTo(coverImage.snp.trailing).offset(10)
+            $0.trailing.equalTo(5)
         }
     }
     
@@ -120,8 +134,9 @@ class ComicDetailView: UIView {
         addSubview(digitalPriceLabel)
         
         digitalPriceLabel.snp.makeConstraints {
-            $0.top.equalTo(priceLabel.snp.top).offset(30)
+            $0.top.equalTo(priceLabel.snp.bottom).offset(5)
             $0.leading.equalTo(coverImage.snp.trailing).offset(10)
+            $0.trailing.equalTo(5)
         }
     }
     
@@ -147,6 +162,35 @@ class ComicDetailView: UIView {
         }
     }
     
+    
+    func setValues(comic: ComicModel, buyAction: Selector, cartAction: Selector, controller: UIViewController) {
+        titleLabel.text = comic.title?.titleFormat()
+        issueLabel.text = "Issue #\(comic.issueNumber ?? 0)"
+        
+        guard let prices = comic.prices else { return }
+        
+        for price in prices {
+            if let printPrice = price.printPrice() {
+                priceLabel.text = "Price: $\(printPrice)"
+            } else {
+                priceLabel.text = "Print Price: Not Available"
+            }
+            
+            if let digitalPrice = price.digitalPrice() {
+                digitalPriceLabel.text = "Price: $\(digitalPrice)"
+            } else {
+                digitalPriceLabel.text = "Digital Price: Not Available"
+            }
+            
+        }
+        
+        let url = URL(string: (comic.thumbnail?.path ?? "")+".jpg")
+        coverImage.kf.setImage(with: url)
+        
+        buyButton.addTarget(controller, action: buyAction, for: .touchDown)
+        addToCartButton.addTarget(controller, action: cartAction, for: .touchDown)
+        
+    }
 
     
 }
