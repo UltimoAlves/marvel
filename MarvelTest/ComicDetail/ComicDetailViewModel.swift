@@ -15,12 +15,11 @@ import UIKit
 protocol ComicDetailViewModelDelegate: AnyObject {
     func fillContent(comic: ComicModel)
     func buyAction()
-    func addToCartAction()
 }
 
 public final class ComicDetailViewModel {
     var router: ComicDetailRouter?
-    private var comic: ComicModel?
+    private var comic: ComicModel
     private weak var delegate: ComicDetailViewModelDelegate?
 
     init(router: ComicDetailRouter?, comic: ComicModel, delegate: ComicDetailViewModelDelegate) {
@@ -36,6 +35,6 @@ public final class ComicDetailViewModel {
     }
     
     func addToCartAction() {
-        delegate?.addToCartAction()
+        CartManager.shared.addToCart(comic: comic)
     }
 }

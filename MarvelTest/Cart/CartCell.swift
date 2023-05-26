@@ -1,15 +1,18 @@
 //
-//  HomeCollectionViewCell.swift
+//  CartCell.swift
 //  MarvelTest
 //
-//  Created by Ultimo Alves on 08/05/23.
+//  Created by Ultimo Alves on 26/05/23.
 //
 
+import Foundation
 import UIKit
-import SnapKit
 import Kingfisher
-class HomeCollectionViewCell: UICollectionViewCell {
-    static let id = "HomeCell"
+
+
+class CartCell: UITableViewCell {
+    static let id = "CartCell"
+  
     private var coverImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "house")
@@ -29,10 +32,11 @@ class HomeCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         setupLayout()
-      
     }
     
     required init?(coder: NSCoder) {

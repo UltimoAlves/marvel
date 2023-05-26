@@ -15,6 +15,7 @@ class ComicDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = mainView
+        CartManager.shared.cartCount()
     }
     
     @objc
@@ -34,11 +35,7 @@ extension ComicDetailViewController: ComicDetailViewModelDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alert, animated: true)
     }
-    
-    func addToCartAction() {
-        print("add")
-    }
-    
+
     func fillContent(comic: ComicModel) {
         mainView.setValues(comic: comic, buyAction: #selector(getBuyAction),
                            cartAction: #selector(getAddToCartAction),
