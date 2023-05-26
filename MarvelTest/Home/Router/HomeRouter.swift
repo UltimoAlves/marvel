@@ -11,29 +11,28 @@ import UIKit
 class HomeModule {
     func createModule() -> HomeViewController {
         let homeViewController = HomeViewController()
-        homeViewController.viewModel = HomeViewModel(router: HomeRouter(viewController: homeViewController),
+        homeViewController.viewModel = HomeViewModel(router: HomeRouter(),
                                                      service: HomeService(),
                                                      delegate: homeViewController)
+        
+        homeViewController.viewModel?.router?.viewController = homeViewController
         return homeViewController
     }
 }
 
 class HomeRouter {
-    var viewController: UIViewController?
-    
-    init(viewController: UIViewController? = nil) {
-        self.viewController = viewController
-    }
+   weak var viewController: UIViewController?
+
 }
 
-protocol HomeRouterProtocol {
-    func routeToDetail(homeViewModel: HomeViewModel?)
+protocol HomeRouterProtocol: AnyObject {
+    func routeToDetail(comic: ComicModel)
 }
 
 extension HomeRouter: HomeRouterProtocol {
     
-    func routeToDetail(homeViewModel: HomeViewModel?) {
-        let home = LoginModule().createModule()
-        viewController?.present(home, animated: true)
+    func routeToDetail(comic: ComicModel) {
+        let comicDetail = ComicDetailModule().createModule(comic: comic)
+        viewController?.navigationController?.pushViewController(comicDetail, animated: true)
     }
 }

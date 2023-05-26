@@ -16,7 +16,7 @@ protocol HomeViewModelDelegate: AnyObject {
 }
 
 public final class HomeViewModel {
-    private weak var router: HomeRouter?
+    var router: HomeRouter?
     private var service: HomeService
     private var comics: [ComicModel] = []
     private weak var delegate: HomeViewModelDelegate?
@@ -24,7 +24,7 @@ public final class HomeViewModel {
     private var yearToFilter = 0
     private var titleToFilter = ""
     
-    init(router: HomeRouter!, service: HomeService, delegate: HomeViewModelDelegate) {
+    init(router: HomeRouter, service: HomeService, delegate: HomeViewModelDelegate) {
         self.router = router
         self.service = service
         self.delegate = delegate
@@ -92,6 +92,10 @@ public final class HomeViewModel {
         comics.removeAll()
         pageNumber = 0
         delegate?.reloadContent()
+    }
+    
+    func navigateToComicDetail(index: Int) {
+        router?.routeToDetail(comic: comics[index])
     }
     
 }

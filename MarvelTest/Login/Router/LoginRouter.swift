@@ -18,10 +18,10 @@ class LoginModule {
 }
 
 class LoginRouter {
-    var viewController: LoginViewController?
+    weak var viewController: LoginViewController?
 }
 
-protocol LoginRouterProtocol {
+protocol LoginRouterProtocol: AnyObject {
     func routeToHome()
 }
 

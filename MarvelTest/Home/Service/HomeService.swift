@@ -14,7 +14,7 @@ class HomeService {
     func getComics(pageNumber: Int) {
         guard let hashKeyValue = ProcessInfo.processInfo.environment["MARVEL_HASH_KEY"] else { return }
         guard let publicKeyValue = ProcessInfo.processInfo.environment["MARVEL_PUBLIC_KEY"] else { return }
-        let maxItensPage = 20
+        let maxItensPage = 50
         
         
         let base = "https://gateway.marvel.com:443/v1/public/comics?"
@@ -24,6 +24,12 @@ class HomeService {
         let publicKey = "&apikey=\(publicKeyValue)"
         let hashKey = "&hash=\(hashKeyValue)"
         let url = base+limit+offset+ts+publicKey+hashKey
+        
+//            let request = AF.request(url)
+//               // 2
+//               request.responseJSON { (data) in
+//                 print(data)
+//               }
         
         AF.request(url).responseDecodable(of: ComicDataWrapper.self) { response in
             switch response.result {
