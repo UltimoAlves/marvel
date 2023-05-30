@@ -46,7 +46,12 @@ class HomeViewController: UIViewController {
         button.frame = CGRectMake(0, 0, 30, 30)
         let barButton = UIBarButtonItem(customView: button)
         navigationItem.rightBarButtonItem = barButton
+        
+        navigationController?.navigationBar.barTintColor = .black
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.tintColor = .green
     }
+    
     @objc
     func filterTapped() {
         viewModel?.showFilterInput()
@@ -122,9 +127,7 @@ extension HomeViewController: HomeViewModelDelegate {
             viewModel?.clearData()
             
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { (action) in
-            self.dismiss(animated: true, completion: nil)
-        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
         
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Year"

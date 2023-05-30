@@ -9,18 +9,17 @@ import Foundation
 
 
 import Foundation
-import Alamofire
 import UIKit
 
 protocol ComicDetailViewModelDelegate: AnyObject {
     func fillContent(comic: ComicModel)
-    func buyAction()
-    func addToCartAction()
+    func addCartDone()
+    func showAlertAddAgain()
 }
 
 public final class ComicDetailViewModel {
     var router: ComicDetailRouter?
-    private var comic: ComicModel?
+    private var comic: ComicModel
     private weak var delegate: ComicDetailViewModelDelegate?
 
     init(router: ComicDetailRouter?, comic: ComicModel, delegate: ComicDetailViewModelDelegate) {
@@ -31,11 +30,16 @@ public final class ComicDetailViewModel {
         delegate.fillContent(comic: comic)
     }
     
-    func buyAction() {
-        delegate?.buyAction()
+    func verifyIfAlreadyInCart() {
+        if CartManager.shared.verifyIfExists(comicToVerify: comic) {
+            delegate?.showAlertAddAgain()
+        } else {
+            addToCartAction()
+        }
     }
     
     func addToCartAction() {
-        delegate?.addToCartAction()
+        CartManager.shared.addToCart(comic: comic)
+        delegate?.addCartDone()
     }
 }

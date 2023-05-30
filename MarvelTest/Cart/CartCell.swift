@@ -1,15 +1,18 @@
 //
-//  HomeCollectionViewCell.swift
+//  CartCell.swift
 //  MarvelTest
 //
-//  Created by Ultimo Alves on 08/05/23.
+//  Created by Ultimo Alves on 26/05/23.
 //
 
+import Foundation
 import UIKit
-import SnapKit
 import Kingfisher
-class HomeCollectionViewCell: UICollectionViewCell {
-    static let id = "HomeCell"
+
+
+class CartCell: UITableViewCell {
+    static let id = "CartCell"
+  
     private var coverImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "house")
@@ -21,18 +24,18 @@ class HomeCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "nome aqui"
         label.numberOfLines = 3
-        label.font = UIFont.systemFont(ofSize: 10)
+        label.font = UIFont.systemFont(ofSize: 15)
         label.textAlignment = .center
         label.textColor = .green
-        label.backgroundColor = .black
         label.showsExpansionTextWhenTruncated = false
         return label
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         setupLayout()
-      
     }
     
     required init?(coder: NSCoder) {
@@ -41,9 +44,8 @@ class HomeCollectionViewCell: UICollectionViewCell {
     
     private func setupLayout() {
         backgroundColor = .black
-        setupTitle()
         setupCoverImage()
-        
+        setupTitle()
     }
     
     private func setupTitle() {
@@ -51,8 +53,8 @@ class HomeCollectionViewCell: UICollectionViewCell {
         
         titleLabel.snp.makeConstraints {
             $0.bottom.equalToSuperview()
-            $0.left.equalToSuperview()
-            $0.right.equalToSuperview()
+            $0.leading.equalTo(coverImage.snp.trailing).offset(10)
+            $0.top.equalToSuperview()
         }
     }
     
@@ -60,10 +62,10 @@ class HomeCollectionViewCell: UICollectionViewCell {
         addSubview(coverImage)
         
         coverImage.snp.makeConstraints {
-            $0.bottom.equalTo(titleLabel.snp.top)
+            $0.bottom.equalToSuperview()
             $0.top.equalToSuperview()
             $0.left.equalToSuperview()
-            $0.right.equalToSuperview()
+            $0.width.equalTo(50)
         }
     }
     

@@ -25,6 +25,14 @@
 		64C5B1B42A1F526500A231F1 /* ComicDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5B1B32A1F526500A231F1 /* ComicDetailViewModel.swift */; };
 		64C5B1B62A1F527A00A231F1 /* ComicDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5B1B52A1F527A00A231F1 /* ComicDetailRouter.swift */; };
 		64C5B1B82A214FBE00A231F1 /* Prices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5B1B72A214FBE00A231F1 /* Prices.swift */; };
+		64C5B1BB2A2167F900A231F1 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5B1BA2A2167F900A231F1 /* CartViewController.swift */; };
+		64C5B1BD2A21680300A231F1 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5B1BC2A21680300A231F1 /* CartView.swift */; };
+		64C5B1BF2A21680F00A231F1 /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5B1BE2A21680F00A231F1 /* CartCell.swift */; };
+		64C5B1C12A21681800A231F1 /* CartRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5B1C02A21681800A231F1 /* CartRouter.swift */; };
+		64C5B1C32A21682400A231F1 /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5B1C22A21682400A231F1 /* CartViewModel.swift */; };
+		64C5B1C52A216DAB00A231F1 /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5B1C42A216DAB00A231F1 /* CartModel.swift */; };
+		64C5B1C72A216E7500A231F1 /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5B1C62A216E7500A231F1 /* CartManager.swift */; };
+		64C5B1C92A265C7700A231F1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5B1C82A265C7700A231F1 /* TabBarController.swift */; };
 		64F193D82A0595A1008FA4C1 /* Marvel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 64F193D62A0595A1008FA4C1 /* Marvel.xcdatamodeld */; };
 		64F193DA2A05966D008FA4C1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F193D92A05966D008FA4C1 /* CoreDataManager.swift */; };
 		64F193EA2A095F8F008FA4C1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F193E92A095F8F008FA4C1 /* HomeView.swift */; };
@@ -59,6 +67,14 @@
 		64C5B1B32A1F526500A231F1 /* ComicDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDetailViewModel.swift; sourceTree = "<group>"; };
 		64C5B1B52A1F527A00A231F1 /* ComicDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicDetailRouter.swift; sourceTree = "<group>"; };
 		64C5B1B72A214FBE00A231F1 /* Prices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prices.swift; sourceTree = "<group>"; };
+		64C5B1BA2A2167F900A231F1 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		64C5B1BC2A21680300A231F1 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
+		64C5B1BE2A21680F00A231F1 /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
+		64C5B1C02A21681800A231F1 /* CartRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartRouter.swift; sourceTree = "<group>"; };
+		64C5B1C22A21682400A231F1 /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
+		64C5B1C42A216DAB00A231F1 /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
+		64C5B1C62A216E7500A231F1 /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
+		64C5B1C82A265C7700A231F1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		64F193D72A0595A1008FA4C1 /* Marvel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Marvel.xcdatamodel; sourceTree = "<group>"; };
 		64F193D92A05966D008FA4C1 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		64F193E92A095F8F008FA4C1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -109,7 +125,10 @@
 				6448FDBA29FE2B830038D363 /* AppDelegate.swift */,
 				6448FDBC29FE2B830038D363 /* SceneDelegate.swift */,
 				64F193F32A0970DB008FA4C1 /* Extensions.swift */,
+				64C5B1C82A265C7700A231F1 /* TabBarController.swift */,
 				64C5B1A72A1E97C900A231F1 /* String+extension.swift */,
+				64F193F62A097118008FA4C1 /* Model */,
+				64C5B1B92A2167E500A231F1 /* Cart */,
 				64C5B1AE2A1F504F00A231F1 /* ComicDetail */,
 				64F193E82A095F79008FA4C1 /* Home */,
 				64FF36BD2A057F26003D826C /* Login */,
@@ -133,6 +152,19 @@
 			path = ComicDetail;
 			sourceTree = "<group>";
 		};
+		64C5B1B92A2167E500A231F1 /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				64C5B1C62A216E7500A231F1 /* CartManager.swift */,
+				64C5B1BA2A2167F900A231F1 /* CartViewController.swift */,
+				64C5B1BC2A21680300A231F1 /* CartView.swift */,
+				64C5B1BE2A21680F00A231F1 /* CartCell.swift */,
+				64C5B1C02A21681800A231F1 /* CartRouter.swift */,
+				64C5B1C22A21682400A231F1 /* CartViewModel.swift */,
+			);
+			path = Cart;
+			sourceTree = "<group>";
+		};
 		64F193E82A095F79008FA4C1 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,7 +172,6 @@
 				64F193F52A097106008FA4C1 /* View */,
 				64F193FE2A097E32008FA4C1 /* Router */,
 				64F193FF2A097E3A008FA4C1 /* ViewModel */,
-				64F193F62A097118008FA4C1 /* Model */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -159,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				64A6062A2A1D941F007698B5 /* ComicModel.swift */,
+				64C5B1C42A216DAB00A231F1 /* CartModel.swift */,
 				64C5B1B72A214FBE00A231F1 /* Prices.swift */,
 				64A606302A1D9C40007698B5 /* CoverImageModel.swift */,
 				64A6062E2A1D96D7007698B5 /* ComicDataContainer.swift */,
@@ -174,13 +206,6 @@
 				64A606322A1D9EA9007698B5 /* HomeServiceOutput.swift */,
 			);
 			path = Service;
-			sourceTree = "<group>";
-		};
-		64F193F82A097B86008FA4C1 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		64F193F92A097B90008FA4C1 /* View */ = {
@@ -227,7 +252,6 @@
 		64FF36BD2A057F26003D826C /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				64F193F82A097B86008FA4C1 /* Model */,
 				64F193F92A097B90008FA4C1 /* View */,
 				64F193FB2A097B9C008FA4C1 /* Router */,
 				64F193FA2A097B97008FA4C1 /* ViewModel */,
@@ -321,6 +345,7 @@
 				6448FDBB29FE2B830038D363 /* AppDelegate.swift in Sources */,
 				64F194012A097E4C008FA4C1 /* HomeRouter.swift in Sources */,
 				64F193EE2A095FA9008FA4C1 /* HomeViewModel.swift in Sources */,
+				64C5B1C52A216DAB00A231F1 /* CartModel.swift in Sources */,
 				64A6062F2A1D96D7007698B5 /* ComicDataContainer.swift in Sources */,
 				64A606292A1D90CE007698B5 /* HomeService.swift in Sources */,
 				64FF36BF2A057F97003D826C /* LoginViewModel.swift in Sources */,
@@ -336,11 +361,18 @@
 				64C5B1B22A1F525700A231F1 /* ComicDetailView.swift in Sources */,
 				64C5B1B62A1F527A00A231F1 /* ComicDetailRouter.swift in Sources */,
 				64C5B1B82A214FBE00A231F1 /* Prices.swift in Sources */,
+				64C5B1C12A21681800A231F1 /* CartRouter.swift in Sources */,
 				64C5B1A82A1E97C900A231F1 /* String+extension.swift in Sources */,
+				64C5B1C92A265C7700A231F1 /* TabBarController.swift in Sources */,
 				6448FDBD29FE2B830038D363 /* SceneDelegate.swift in Sources */,
+				64C5B1BD2A21680300A231F1 /* CartView.swift in Sources */,
+				64C5B1C72A216E7500A231F1 /* CartManager.swift in Sources */,
+				64C5B1BF2A21680F00A231F1 /* CartCell.swift in Sources */,
 				64A6062B2A1D941F007698B5 /* ComicModel.swift in Sources */,
+				64C5B1C32A21682400A231F1 /* CartViewModel.swift in Sources */,
 				64A606332A1D9EA9007698B5 /* HomeServiceOutput.swift in Sources */,
 				64F193FD2A097BA6008FA4C1 /* LoginRouter.swift in Sources */,
+				64C5B1BB2A2167F900A231F1 /* CartViewController.swift in Sources */,
 				64F193F22A095FCF008FA4C1 /* HomeCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
