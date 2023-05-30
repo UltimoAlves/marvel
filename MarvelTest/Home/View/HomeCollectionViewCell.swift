@@ -40,7 +40,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupLayout() {
-        backgroundColor = .blue
+        backgroundColor = .black
         setupTitle()
         setupCoverImage()
         

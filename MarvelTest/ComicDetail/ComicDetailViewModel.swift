@@ -9,12 +9,12 @@ import Foundation
 
 
 import Foundation
-import Alamofire
 import UIKit
 
 protocol ComicDetailViewModelDelegate: AnyObject {
     func fillContent(comic: ComicModel)
-    func buyAction()
+    func addCartDone()
+    func showAlertAddAgain()
 }
 
 public final class ComicDetailViewModel {
@@ -30,11 +30,16 @@ public final class ComicDetailViewModel {
         delegate.fillContent(comic: comic)
     }
     
-    func buyAction() {
-        delegate?.buyAction()
+    func verifyIfAlreadyInCart() {
+        if CartManager.shared.verifyIfExists(comicToVerify: comic) {
+            delegate?.showAlertAddAgain()
+        } else {
+            addToCartAction()
+        }
     }
     
     func addToCartAction() {
         CartManager.shared.addToCart(comic: comic)
+        delegate?.addCartDone()
     }
 }

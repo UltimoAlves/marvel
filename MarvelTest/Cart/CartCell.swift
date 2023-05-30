@@ -24,10 +24,9 @@ class CartCell: UITableViewCell {
         let label = UILabel()
         label.text = "nome aqui"
         label.numberOfLines = 3
-        label.font = UIFont.systemFont(ofSize: 10)
+        label.font = UIFont.systemFont(ofSize: 15)
         label.textAlignment = .center
         label.textColor = .green
-        label.backgroundColor = .black
         label.showsExpansionTextWhenTruncated = false
         return label
     }()
@@ -44,10 +43,9 @@ class CartCell: UITableViewCell {
     }
     
     private func setupLayout() {
-        backgroundColor = .blue
-        setupTitle()
+        backgroundColor = .black
         setupCoverImage()
-        
+        setupTitle()
     }
     
     private func setupTitle() {
@@ -55,8 +53,8 @@ class CartCell: UITableViewCell {
         
         titleLabel.snp.makeConstraints {
             $0.bottom.equalToSuperview()
-            $0.left.equalToSuperview()
-            $0.right.equalToSuperview()
+            $0.leading.equalTo(coverImage.snp.trailing).offset(10)
+            $0.top.equalToSuperview()
         }
     }
     
@@ -64,10 +62,10 @@ class CartCell: UITableViewCell {
         addSubview(coverImage)
         
         coverImage.snp.makeConstraints {
-            $0.bottom.equalTo(titleLabel.snp.top)
+            $0.bottom.equalToSuperview()
             $0.top.equalToSuperview()
             $0.left.equalToSuperview()
-            $0.right.equalToSuperview()
+            $0.width.equalTo(50)
         }
     }
     

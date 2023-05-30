@@ -28,8 +28,8 @@ protocol LoginRouterProtocol: AnyObject {
 extension LoginRouter: LoginRouterProtocol {
     
     func routeToHome() {
-        let navController = UINavigationController(rootViewController: HomeModule().createModule())
-        navController.modalPresentationStyle = .fullScreen
-        viewController?.present(navController, animated: true)
+        let tabBarVC = TabBarController()
+        tabBarVC.modalPresentationStyle = .fullScreen
+        viewController?.present(tabBarVC, animated: true)
     }
 }

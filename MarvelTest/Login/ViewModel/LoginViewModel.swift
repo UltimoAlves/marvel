@@ -33,11 +33,11 @@ public final class LoginViewModel {
     }
     
     func authenticate(email: String, password: String) {
-     //   if coreData.aunthenticate(email: email, password: password) {
+        if coreData.aunthenticate(email: email, password: password) {
             delegate?.loginSuccess()
-//        } else {
-//            delegate?.loginFailure()
-//        }
+        } else {
+            delegate?.loginFailure()
+        }
     }
     
     func navigateToHome(){

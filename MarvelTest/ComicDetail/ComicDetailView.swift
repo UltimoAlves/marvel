@@ -52,13 +52,6 @@ class ComicDetailView: UIView {
         return label
     }()
     
-    private var buyButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .green
-        button.setTitle("Buy", for: .normal)
-        return button
-    }()
-    
     private var addToCartButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .blue
@@ -83,7 +76,6 @@ class ComicDetailView: UIView {
         setupIssue()
         setupPrice()
         setupDigitalPrice()
-        setupBuyButton()
         setupAddToCartButton()
         
     }
@@ -140,17 +132,6 @@ class ComicDetailView: UIView {
         }
     }
     
-    private func setupBuyButton() {
-        addSubview(buyButton)
-        
-        buyButton.snp.makeConstraints {
-            $0.top.equalTo(coverImage.snp.bottom).offset(10)
-            $0.trailing.equalTo(-5)
-            $0.width.equalTo(coverImage.snp.width)
-            $0.height.equalTo(50)
-        }
-    }
-    
     private func setupAddToCartButton() {
         addSubview(addToCartButton)
         
@@ -163,7 +144,7 @@ class ComicDetailView: UIView {
     }
     
     
-    func setValues(comic: ComicModel, buyAction: Selector, cartAction: Selector, controller: UIViewController) {
+    func setValues(comic: ComicModel, cartAction: Selector, controller: UIViewController) {
         titleLabel.text = comic.title?.titleFormat()
         issueLabel.text = "Issue #\(comic.issueNumber ?? 0)"
         
@@ -187,7 +168,6 @@ class ComicDetailView: UIView {
         let url = URL(string: (comic.thumbnail?.path ?? "")+".jpg")
         coverImage.kf.setImage(with: url)
         
-        buyButton.addTarget(controller, action: buyAction, for: .touchDown)
         addToCartButton.addTarget(controller, action: cartAction, for: .touchDown)
         
     }

@@ -6,3 +6,21 @@
 //
 
 import Foundation
+import UIKit
+
+class CartModule {
+    func createModule() -> CartViewController {
+        let homeViewController = CartViewController()
+        homeViewController.viewModel = CartViewModel(router: CartRouter(),
+                                                     delegate: homeViewController)
+        
+        homeViewController.viewModel?.router?.viewController = homeViewController
+        return homeViewController
+    }
+}
+
+class CartRouter {
+   weak var viewController: UIViewController?
+
+}
+

@@ -15,8 +15,19 @@ class CartView: UIView {
         let tableView = UITableView()
         tableView.register(CartCell.self, forCellReuseIdentifier: CartCell.id)
         tableView.separatorStyle = .singleLine
+        tableView.backgroundColor = .black
+        tableView.rowHeight = 60
         return tableView
     }()
+    
+    private var emptyLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Cart is empty"
+        label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        label.textAlignment = .center
+        label.textColor = .green
+        return label
+    } ()
     
     
     init() {
@@ -30,7 +41,9 @@ class CartView: UIView {
     }
     
     private func setupLayout() {
+        backgroundColor = .black
         setupTableView()
+        setupEmptyLabel()
     }
     
     private func setupTableView() {
@@ -40,6 +53,14 @@ class CartView: UIView {
             $0.top.equalToSuperview()
             $0.left.equalToSuperview()
             $0.right.equalToSuperview()
+        }
+    }
+    
+    private func setupEmptyLabel() {
+        addSubview(emptyLabel)
+        emptyLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview()
         }
     }
     
@@ -53,5 +74,21 @@ class CartView: UIView {
         tableView.reloadData()
     }
     
+    func setState(state: CartViewState) {
+        switch state {
+        case .empty:
+            tableView.isHidden = true
+            emptyLabel.isHidden = false
+        case .filled:
+            tableView.isHidden = false
+            emptyLabel.isHidden = true
+        }
+    }
 }
+
+enum CartViewState {
+    case empty
+    case filled
+}
+
 
